@@ -100,6 +100,8 @@
 就chrome的实现来看，align设置了非middle值的字幕，只会占据视频宽度的50%，值为start，占据的是右半边，值为end则占据视频的左半边。如果chrome开启了 [shadow Dom](http://www.w3.org/TR/shadow-dom/)的话，可以看到字幕的结构如下图：
 ![字幕的shadow Dom](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image3.png)
 
+所以，实际的字幕文本是包在一个名为**“cue”的伪元素**中的。而其父节点的style属性里，设置了text-align值为start，且字幕块是绝对定位，width和left都为50%。
+
 ##### 2.size #####
 可以通过size来设置字幕文本占据视频viewport的宽度比例，如下例子：
 
@@ -109,10 +111,20 @@
 在chrome里显示的效果如下：
 ![字幕的shadow Dom](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image4.png)
 
-##### 2.size #####
+##### 3.伪元素 #####
+刚刚说到字幕文本实际是包在名为**“cue”的伪元素**中，而这个伪元素，正是我们用来设置字幕文本样式的一个中介。来看下面这个例子：
 
+    00:00:24.000 --> 00:00:28.000 
+	样式<v.support>支持</v>么?yes,支持伪元素
+	c标签也可用于设置<c.aclass>样式噢
+	<v.third.loud>可以在V上设定多个样式
+字幕文本可以嵌入V（voice）、C（class）这类标签，同时标签后可以跟相应的样式名称，且可设置多个样式名称。
 
-
+    ::cue(.aclass){font-size:28px;color:#fe8;background:#ad9;font-weight: bold;font-family:simsun;font-style:italic;}
+	::cue(.support){color:yellow;}
+	::cue(v[voice="Jack"]){color:blue;border:2px solid #000;padding:0;background:#fff;opacity:0.5;border-radius:5px;}
+	::cue(.third){color:red;}
+	::cue(.loud){font-size:2em;opacity:0.6;text-shadow:0 0 3px #fc0;border:1px solid #0fc;display: block;padding:10px;}
 
 
 ## TTML ##
