@@ -1,0 +1,124 @@
+WEBVTT
+
+
+00:00:00.500 --> 00:00:04.000 align:start
+我是align：start，是文本开头对齐方式
+
+00:00:04.000 --> 00:00:08.000 align:end
+我是align：end，是文本结尾对齐方式
+如果有两行，那两行的结尾对齐
+
+3
+00:00:08.000 --> 00:00:11.000
+默认是居中的
+也就是align:middle
+
+4
+00:00:11.000 --> 00:00:15.000
+如果时间重叠会如何呢？
+
+5
+00:00:12.200 --> 00:00:14.200
+我会按时出现，按时消失（新的在上面）
+
+6
+00:00:32.500 --> 00:00:34.800
+我会很晚出现，尽管我在文档中靠前
+
+7
+00:00:15.200 --> 00:00:18.700 size:10%
+事实上我被设置了size：10%
+代表只占据视频10%的宽度
+
+8
+00:00:18.700 --> 00:00:21.000 
+The Organisation for Sample Public Service Announcements accepts no liability for the content of this advertisement, or for the consequences of any actions taken on the basis of the information provided.//我很长  被自动换行了
+
+9
+00:00:21.000 --> 00:00:24.000 
+Look,我下面有个note，但是你看不到
+
+NOTE 我是注释,必须以“NOTE”开头，紧跟空格或换一行，上下要空行
+
+10
+00:00:24.000 --> 00:00:28.000 
+样式<v.support>支持</v>么?yes,支持伪元素
+c标签也可用于设置<c.aclass>样式噢
+
+11
+00:00:28.000 --> 00:00:32.000 
+<v Jack>v=voice，可以不闭合
+
+12
+00:00:32.000 --> 00:00:35.000 
+<v.third.loud>可以在V上设定多个样式
+
+13
+00:00:35.000 --> 00:00:38.200 position:10% align:start
+-华丽丽的定位来啦~position:10%(可以为负),start对齐
+-Video视窗10%的宽度的地方（水平方向定位）
+
+NOTE 定位的应用场景：画面中有多人对话，可把文本定位到人物附近
+
+14
+00:00:38.200 --> 00:00:42.000 position:15%
+<v Lilei>Lilei: I miss U
+
+15
+00:00:39.200 --> 00:00:42.000 position:75%
+<v Hanmm>HanMeimei: I miss U,2.
+
+16
+00:00:42.000 --> 00:00:45.000 position:90% align:end size:35%
+再看一个定位：position:90% + size:35% + end
+
+17
+00:00:45.000 --> 00:00:47.700 line:0
+-怎能没有垂直方向呢
+-让line来帮忙
+
+18
+00:00:47.700 --> 00:00:50.400 position:-10% line:5 align:start
+position和line一起来
+
+19
+00:00:50.400 --> 00:00:53.000 line:-5
+line如果是负数呢
+
+20
+00:00:53.100 --> 00:00:57.000 region:lily align:left
+高大上的Region啊
+chrome稳定版还没支持 开发版可以噢~ 我的scroll是up 会有什么不同呢 看下效果吧 啊啊啊啊啊啊啊啊啊啊啊
+
+NOTE that regions are only defined for horizontal cues.
+regions只能给水平的字幕设定
+
+
+21
+00:00:53.100 --> 00:00:57.000 region:lucy align:right
+高大上的Region2啊
+chrome稳定版还没支持 开发版可以噢~啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+
+22
+00:00:57.000 --> 00:01:00.000
+即使不设置region，框还是在，内容被挤到上面了
+
+23
+00:01:00.000 --> 00:01:05.000 vertical:rl
+下面介绍垂直文本vertical ，我的值是rl (right to left)
+
+24
+00:01:05.000 --> 00:01:10.000  vertical:lr
+还是垂直文本vertical，这回我的值是lr (left to right)
+
+25
+00:01:10.000 --> 00:01:15.000 
+有个img标签会怎样呢<img src="a.png" alt="这是图片" />
+
+26
+00:01:15.000 --> 00:01:20.000 
+002323
+
+27
+00:01:20.000 --> 00:01:25.000 
+撒旦法士大夫

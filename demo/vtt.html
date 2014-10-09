@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>TTML</title>
+<style type="text/css">
+	video{height:400px;}
+	.cuewrap{
+		margin-top:50px;border:1px solid #ddd;padding:10px;
+	}
+
+	/* 应用到vtt的样式 pseudo-element */
+	/* 统一定义字幕容器的样式 */
+	/*::cue{padding:0;font-size:12px; border:3px solid #f00;border-radius: 15px;background-color:transparent;color:#000;}*/
+	/*::cue(v[voice="Jack"]){display:block;position:absolute;-webkit-animation:1s ease;-webkit-animation-name:bounce;}*/
+
+	::cue(.aclass){font-size:28px;color:#fe8;background:#ad9;font-weight: bold;font-family:simsun;font-style:italic;}
+	::cue(.support){color:yellow;}
+	::cue(v[voice="Jack"]){color:blue;border:2px solid #000;padding:0;background:#fff;opacity:0.5;border-radius:5px;}
+	::cue(.third){color:red;}
+	::cue(.loud){font-size:2em;opacity:0.6;text-shadow:0 0 3px #fc0;border:1px solid #0fc;display: block;padding:10px;}
+	::cue(v[voice="Lilei"]){color:red;}
+	::cue(v[voice="Hanmm"]){color:green;}
+	::cue(#cuetest){color:red;font-size:2em;}
+
+	video::-webkit-media-text-track-region{background-color:#fff;color:#0fc;}
+	
+
+	/* 弹跳 */
+	@-webkit-keyframes bounce{
+	    0%,20%,50%,80%,100%{-webkit-transform:translateY(0);}
+	    40%{-webkit-transform:translateY(-30px);}
+	    60%{-webkit-transform:translateY(-15px);}
+	}
+	@keyframes bounce{
+	    0%,20%,50%,80%,100%{transform:translateY(0);}
+	    40%{transform:translateY(-30px);}
+	    60%{transform:translateY(-15px);}
+	}
+
+</style>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width"/>
+</head>
+<body> 
+	<h2>WEBVTT</h2>
+    <video id="js-video" controls src="demo.mp4">
+		<p>您的浏览器不支持 video 标签。</p>		
+		<!-- <track src="demo.vtt" id="js-tracknode" label="demo vtt" kind="subtitles" srclang="en-us" default=""> -->
+		<!-- <track src="demo-zh.vtt" id="js-tracknode" label="metadata kind" kind="captions" srclang="en-us" default=""> -->
+		<track src="ds.vtt" id="js-tracknode" label="ds vtt" kind="captions" srclang="en-us" default="">
+	</video>
+	<div class="cuewrap"></div>
+</body>
+
+<script type="text/javascript">
+	function $(sl,ctx){return (ctx||document).querySelector(sl)}
+	function init () {
+		var trackNode = $("#js-tracknode");
+		var textTrack = trackNode.track;
+
+		trackNode.onload = showCue(trackNode);
+	}
+
+	function showCue(trackNode){
+		if(trackNode.readyState == 2 || trackNode.readyState == 'complete'){
+			console.log(trackNode.readyState); //chrome is 2,ie is complete
+			trackNode.addEventListener("cuechange", function (){
+	        	var track = this.track;        
+	        	var activecue = track.activeCues;
+		        if(activecue.length > 0){
+		        	$(".cuewrap").innerHTML = '';
+		        	for(var i=0;i<activecue.length;i++){
+		        		$(".cuewrap").innerHTML += activecue[i].text;
+		        	}
+		        	
+		       	}
+		    }, false); 
+		}
+	}
+
+	window.onload = init;
+
+</script> 
+</html>
