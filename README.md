@@ -109,7 +109,7 @@
 	事实上我被设置了size：10%
 	代表占据视频可视区域10%的宽度
 在chrome里显示的效果如下：
-![字幕的shadow Dom](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image4.png)
+![size效果](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image4.png)
 
 ##### 3.伪元素 #####
 刚刚说到字幕文本实际是包在名为**“cue”的伪元素**中，而这个伪元素，正是我们用来设置字幕文本样式的一个中介。来看下面这个例子：
@@ -125,6 +125,8 @@
 	::cue(v[voice="Jack"]){color:blue;border:2px solid #000;padding:0;background:#fff;opacity:0.5;border-radius:5px;}
 	::cue(.third){color:red;}
 	::cue(.loud){font-size:2em;opacity:0.6;text-shadow:0 0 3px #fc0;border:1px solid #0fc;display: block;padding:10px;}
+
+![伪元素效果](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image5.png)
 
 
 ## TTML ##
