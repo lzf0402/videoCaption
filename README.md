@@ -10,13 +10,14 @@
     </video> 
 
 字幕在视频里的效果如下图：[chrome浏览器]
-![视频字幕效果](http://i.imgur.com/cTLDh0X.png)
+![视频字幕效果](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image1.png)
+
 
 以上内容，了解了如何快速的制作字幕文件、字幕与时间的紧密关系以及如何在视频中引入字幕文件，下面就进一步来了解下 **track** 元素、**webVTT**和**TTML**吧
 
 ## track元素 ##
 **track** 元素（对应的[W3C规范](http://www.w3.org/TR/html51/embedded-content.html#the-track-element)），从上面代码可知，是嵌入在video元素（或audio等媒体元素）内的空内容元素，可以为用户针对视频(或音频)提供多种语言或解说词的计时文本文件。一个video标签，可设置**多个** 计时文本轨道，但需要指定一个default轨道。**track** 元素基本属性如下表：
-![](http://i.imgur.com/TOEETWs.png)
+![track 元素基本属性](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image2.png)
 
 下面，通过一个小demo来介绍下**track** 元素的DOM接口：
 > 结构：
@@ -82,7 +83,7 @@
 - 每一条字幕有一个时间段和一或多条文本组成，且上下都需空一行。
 - 时间段由1个开始时间点+“-->”+1个结束时间点组成，时间段后面可以跟该条字幕的id。
 - 字幕文本可以换行，也可以带有HTML标签，标签上可以设置样式属性。但上诉代码中的“我是红P”并不会以红色显示。
-- 注释可以通过“NOTE”开头紧跟空格或换行再加注释内容的形式来添加，注释也需要上下空行。
+- 注释可以通过“NOTE”开头紧跟空格或换行再加注释内容的形式来添加，内容可以多行，注释也需要上下空行。
 
 当然，以上的例子能满足基本的字幕表现需求。那如果想要让字幕有更多更丰富的效果，又该如何来设置呢？以chrome37为例
 
@@ -96,7 +97,19 @@
 	我是align：end，是文本结尾对齐方式
 	如果有两行，那两行的结尾对齐
 
-就chrome的支持度来测，发现以上代码的效果如下
+就chrome的实现来看，align设置了非middle值的字幕，只会占据视频宽度的50%，值为start，占据的是右半边，值为end则占据视频的左半边。如果chrome开启了 [shadow Dom](http://www.w3.org/TR/shadow-dom/)的话，可以看到字幕的结构如下图：
+![字幕的shadow Dom](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image3.png)
+
+##### 2.size #####
+可以通过size来设置字幕文本占据视频viewport的宽度比例，如下例子：
+
+    00:00:15.200 --> 00:00:18.700 size:10%
+	事实上我被设置了size：10%
+	代表占据视频可视区域10%的宽度
+在chrome里显示的效果如下：
+![字幕的shadow Dom](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image4.png)
+
+##### 2.size #####
 
 
 
