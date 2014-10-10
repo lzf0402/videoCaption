@@ -98,6 +98,7 @@
 	如果有两行，那两行的结尾对齐
 
 就chrome的实现来看，align设置了非middle值的字幕，只会占据视频宽度的50%，值为start，占据的是右半边，值为end则占据视频的左半边。如果chrome开启了 [shadow Dom](http://www.w3.org/TR/shadow-dom/)的话，可以看到字幕的结构如下图：
+
 ![字幕的shadow Dom](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image3.png)
 
 所以，实际的字幕文本是包在一个名为**“cue”的伪元素**中的。而其父节点的style属性里，设置了text-align值为start，且字幕块是绝对定位，width和left都为50%。
