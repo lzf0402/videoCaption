@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xmlns="http://www.w3.org/ns/ttml" xml:lang="en">
+<head>
+    <metadata xmlns:ttm="http://www.w3.org/ns/ttml#metadata">
+        <ttm:title/>
+        <ttm:description/>
+        <ttm:copyright/>
+    </metadata>
+    <styling xmlns:tts="http://www.w3.org/ns/ttml#styling">
+        <style xml:id="amara-style" tts:color="red" tts:fontFamily="proportionalSansSerif" tts:fontSize="18px" tts:textAlign="center"/>
+        <style xml:id="style2" style="amara-style" tts:color="yellow"/>
+    </styling>
+    <layout xmlns:tts="http://www.w3.org/ns/ttml#styling">
+        <region xml:id="amara-subtitle-area" style="amara-style" tts:extent="560px 62px" tts:padding="5px 3px" tts:backgroundColor="black" tts:displayAlign="after"/>
+    </layout>
+</head>
+<body region="amara-subtitle-area">    
+    <div>
+        <p xml:id="t0" begin="00:00:00.541" end="00:00:01.372" style="style2">ONE of 001.ttml</p>
+    </div>
+    <div>
+        <p xml:id="t1" begin="00:00:01.372" end="00:00:02.120">TWO</p>
+        <p xml:id="t2" begin="00:00:02.120" end="00:00:03.920">THREE</p>
+        <p xml:id="t3" begin="00:00:03.953" end="00:00:04.418">FOUR</p>
+        <p xml:id="t4" begin="00:00:04.418" end="00:00:06.799">FIVE</p>
+    </div>
+    <div>
+        <p begin="00:00:01.372" end="00:00:02.120">TWO</p>
+        <p begin="00:00:02.120" end="00:00:03.920">THREE</p>
+        <p begin="00:00:03.953" end="00:00:04.418">FOUR</p>
+        <p begin="00:00:04.418" end="00:00:06.799">FIVE</p>
+    </div>
+    <div>
+        <p begin="00:00:01.372" end="00:00:02.120">TWO</p>
+        <p begin="00:00:02.120" end="00:00:03.920">THREE</p>
+        <p begin="00:00:03.953" end="00:00:04.418">FOUR</p>
+        <p begin="00:00:04.418" end="00:00:06.799">FIVE</p>
+    </div>
+    
+</body>
+</tt>

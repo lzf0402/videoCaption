@@ -85,7 +85,7 @@
 - 字幕文本可以换行，也可以带有HTML标签，标签上可以设置样式属性。但上诉代码中的“我是红P”并不会以红色显示。
 - 注释可以通过“NOTE”开头紧跟空格或换行再加注释内容的形式来添加，内容可以多行，注释也需要上下空行。
 
-当然，以上的例子能满足基本的字幕表现需求。那如果想要让字幕有更多更丰富的效果，又该如何来设置呢？以chrome37为例
+当然，以上的例子能满足基本的字幕表现需求。那如果想要让字幕有更多更丰富的效果，又该如何来设置呢？以chrome38为例
 
 ##### 1.对齐 #####
 字幕文本默认是居中对齐(middle)，可以通过设置align的值来改变对齐，如下所示：
@@ -109,25 +109,92 @@
 	事实上我被设置了size：10%
 	代表占据视频可视区域10%的宽度
 在chrome里显示的效果如下：
+
 ![size效果](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image4.png)
 
 ##### 3.伪元素 #####
-刚刚说到字幕文本实际是包在名为**“cue”的伪元素**中，而这个伪元素，正是我们用来设置字幕文本样式的一个中介。来看下面这个例子：
+刚刚说到字幕文本实际是包在名为**“cue”的伪元素**中，而通过这个伪元素，我们可以轻松控制字幕文本的样式，可以设置各种你想要的效果啦。来看下面这个例子：
 
     00:00:24.000 --> 00:00:28.000 
 	样式<v.support>支持</v>么?yes,支持伪元素
-	c标签也可用于设置<c.aclass>样式噢
+	c标签也可用于设置<c.aclass>样式噢</c>
 	<v.third.loud>可以在V上设定多个样式
-字幕文本可以嵌入V（voice）、C（class）这类标签，同时标签后可以跟相应的样式名称，且可设置多个样式名称。
+字幕文本可以嵌入V（voice）、C（class）这类标签，同时标签后可以跟相应的样式名称，如support、aclass等，且可设置多个样式名称（如.third.loud）。如果标签不闭合，后面内容均包含在该标签内。
 
-    ::cue(.aclass){font-size:28px;color:#fe8;background:#ad9;font-weight: bold;font-family:simsun;font-style:italic;}
-	::cue(.support){color:yellow;}
-	::cue(v[voice="Jack"]){color:blue;border:2px solid #000;padding:0;background:#fff;opacity:0.5;border-radius:5px;}
-	::cue(.third){color:red;}
-	::cue(.loud){font-size:2em;opacity:0.6;text-shadow:0 0 3px #fc0;border:1px solid #0fc;display: block;padding:10px;}
+    <style type="text/css">
+	    ::cue(.aclass){font-size:28px;color:#fe8;background:#ad9;font-weight: bold;font-family:simsun;font-style:italic;}
+		::cue(.support){color:yellow;}
+		::cue(.third){color:red;}
+		::cue(.loud){font-size:2em;opacity:0.6;text-shadow:0 0 3px #fc0;border:1px solid #0fc;display: block;padding:10px;}
+	</style>
 
+**::cue伪元素**能设置的css属性主要有：color、opacity、visibility、text-decoration、text-shadow、white-space、background系列、outline系列、font系列，其他的属性会被忽略。
 ![伪元素效果](https://raw.githubusercontent.com/lzf0402/videoCaption/master/demo/image5.png)
 
+通过伪元素，已能在很大程度上满足自定义各种效果的字幕需求。查看[W3C文档](http://dev.w3.org/html5/webvtt/ "webvtt规范")可以知道，还可以给字幕文本设置很多其他的样式，比如设置文本的书写方向（writing direction）,文本定位（text position）、文本轨道区域（Text Track Region）等。
 
 ## TTML ##
+**TTML** 即Timed Text Markup Language，计时文本标记语言，是W3C的推荐标准（[查看文档](http://www.w3.org/TR/ttml1/)）。相对WebVTT来说，TTML可能更正统一点，尽管在浏览器实现方面还赶不上WebVTT。TTML格式的字幕文件，在chrome38里还没支持，但通过规范，先来简单了解下吧。
+##### TTML文档结构 #####
+	<tt xml:lang="" xmlns="http://www.w3.org/ns/ttml"> 
+	  <head>  //head标签
+	    <metadata/>
+	    <styling/>
+	    <layout/>
+	  </head>
+	  <body>
+		//设置字幕
+	  </body> 
+	</tt>
+作为一门标记语言，TTML文档的结构也很清晰简单。tt作为根元素包裹所有的内容，且可设置语言和遵循的规范。head标签里可以设置元数据、样式和布局信息，head里包含的内容并不会作为内容显示出来，实际可显示的字幕内容是包含在body标签里的。
 
+##### TTML Metadata #####
+metadata元数据标签，可以设定TTML文档的title, description, 和 copyright信息等其他任意的metadata信息。如下所示：
+
+	<metadata xmlns:ttm="http://www.w3.org/ns/ttml#metadata">
+	  <ttm:title>Timed Text TTML Example</ttm:title>
+	  <ttm:copyright>The Authors (c) 2006</ttm:copyright>
+	</metadata>
+
+##### TTML Styling #####
+styling样式信息：即能按样式规范形式来设定，也可在行内设定样式信息
+
+	<styling xmlns:tts="http://www.w3.org/ns/ttml#styling">
+	  <!-- s1 定义了文本颜色、字体、字号和对齐样式 -->
+	  <style xml:id="s1" tts:color="white" tts:fontFamily="arial" tts:fontSize="22px" tts:textAlign="center" />
+	  <!-- 除了颜色是yellow外，其他样式同s1所定义的 -->
+	  <style xml:id="s2" style="s1" tts:color="yellow"/> 
+	</styling>
+styling标签里可以定义多条样式。每条样式需要设定一个id，且可以通过style属性“继承”别条样式的值。所以上述代码中，s2的样式继承了s1定义的样式，只把color重写了。
+
+##### TTML Layout #####
+layout布局信息：定义展示内容的一个或多个区域。定义region时，也可以设定或“继承”一些样式，来设置该区域内容的表现形式。
+
+	<layout xmlns:tts="http://www.w3.org/ns/ttml#styling">
+	  <region xml:id="subtitleArea"
+	    style="s1"
+	    tts:extent="560px 62px"
+	    tts:padding="5px 3px"
+	    tts:backgroundColor="black"
+	    tts:displayAlign="after"
+	  />
+	</layout>  
+
+##### TTML Body #####
+上面介绍了如何定义样式信息、布局信息，那如何将这些定义好的信息运用到字幕文本里呢？看下面代码：
+
+	<body region="subtitleArea"> //指定已定义好的region的id
+	  <div>
+	    <p xml:id="subtitle1" begin="0.76s" end="3.45s"> //设定字幕的开始和结束时间点
+	      It seems a paradox, does it not,
+	    </p>
+	    <p xml:id="subtitle2" begin="5.0s" end="10.0s" style="s2">//设定已定义的样式
+	      that the image formed on<br/> //换行用br标签
+	      the Retina should be inverted?
+	    </p>
+	  </div>
+	</body>
+因为目前浏览器没有很好的支持TTML格式，所以这些效果都无法预览。但根据W3C上的规范，已大概能预见到浏览器会实现出的效果。以上只是对TTML的一个概览性的介绍。
+
+## 结语 ##
+本文对**track元素**以及两种字幕文件格式**webVTT**和**TTML**进行了介绍，较偏向于使用层面。一来是对HTML5新加的Video元素和Track元素有进一步认识；二来是想掌握W3C标准组在视频字幕方面的一些动向，虽未列为标准，但作为一个前瞻性的内容先入个门。 随着浏览器如此快速的版本更新，相信不久的将来，各大浏览器厂商在视频字幕方面都会有进一步的支持。

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xmlns="http://www.w3.org/ns/ttml" xml:lang="en">
+<head>
+	<metadata xmlns:ttm="http://www.w3.org/ns/ttml#metadata">
+	  <ttm:title>Timed Text TTML Example</ttm:title>
+	  <ttm:copyright>Netease (c) 2013</ttm:copyright>
+	</metadata>
+	<styling xmlns:tts="http://www.w3.org/ns/ttml#styling">
+	  <style xml:id="s1"
+	    tts:color="yellow"
+	    tts:fontFamily="proportionalSansSerif"
+	    tts:fontSize="22px"
+	    tts:textAlign="center"
+	  />
+	  <style xml:id="s2" style="s1" tts:color="blue"/>
+	  <style xml:id="s1Right" style="s1" tts:textAlign="end" />
+	  <style xml:id="s2Left" style="s2" tts:textAlign="start" />
+	</styling>
+</head>
+<body>
+<div>
+	<p xml:id="t1" begin="00:00:00.000" end="00:00:05.334" style="s1">THIS is from TTML file, timed text markup language!</p>
+	<p xml:id="t2" style="s2" begin="00:00:05.335" end="00:00:15.296">中文可以么？</p>
+	<p xml:id="t3" begin="00:00:15.296" end="00:11:15.296">line break<br />break by "br" tag</p>
+</div>
+</body>
+</tt>
